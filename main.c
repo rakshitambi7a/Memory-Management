@@ -139,7 +139,7 @@ int main() {
         printf("Wasted Memory: %d\n", wasted_memory);
     }
 
-    // Display average fragmentation and wasted memory over the simulation time
+    // Display average fragmentation and Wasted memory over the simulation time
     printf("\nAverage Fragmentation: %.2f\n", (float)total_fragmentation / simulation_time);
     printf("Average Wasted Memory: %.2f\n", (float)total_wasted_memory / simulation_time);
 
