@@ -36,13 +36,27 @@ void firstFit(struct MemoryBlock memory[], int num_blocks, struct Process proces
 }
 
 // Function to deallocate memory blocks for completed processes
-void deallocateMemory(struct MemoryBlock memory[], struct Process processes[], int num_processes) {
+void deallocateMemory(struct MemoryBlock memory[], struct Process processes[], int num_processes, int num_blocks) {
     for (int i = 0; i < num_processes; i++) {
         int block = processes[i].allocated_block;
         if (block != -1) {
             memory[block].allocated = 0;
             memory[block].size += processes[i].size;
             processes[i].allocated_block = -1;
+        }
+    }
+
+    // Merge adjacent unallocated memory blocks
+    for (int i = 0; i < num_blocks - 1; i++) {
+        if (!memory[i].allocated && !memory[i + 1].allocated) {
+            memory[i].size += memory[i + 1].size;
+            // Shift memory blocks to fill the gap
+            for (int j = i + 1; j < num_blocks - 1; j++) {
+                memory[j] = memory[j + 1];
+            }
+            // Reset the last memory block
+            memory[num_blocks - 1].size = 0;
+            memory[num_blocks - 1].allocated = 0;
         }
     }
 }
@@ -91,8 +105,8 @@ int main() {
             printf("Process %d -> Block %d\n", i + 1, processes[i].allocated_block);
         }
 
-        // Deallocate memory for completed processes
-        deallocateMemory(memory, processes, num_processes);
+        // Deallocate memory for completed processes and merge adjacent unallocated blocks
+        deallocateMemory(memory, processes, num_processes, num_blocks);
 
         printf("\nMemory Deallocation:\n");
         // Display deallocated blocks for processes
