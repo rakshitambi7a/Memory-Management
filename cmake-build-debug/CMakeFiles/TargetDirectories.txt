@@ -1,0 +1,3 @@
+C:/Users/raksh/CLionProjects/Operating-Systems-Project-Simulation/cmake-build-debug/CMakeFiles/Operating_Systems_Project_Simulation.dir
+C:/Users/raksh/CLionProjects/Operating-Systems-Project-Simulation/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/raksh/CLionProjects/Operating-Systems-Project-Simulation/cmake-build-debug/CMakeFiles/rebuild_cache.dir
